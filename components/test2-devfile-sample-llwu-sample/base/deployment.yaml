@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: test2-devfile-sample-llwu-sample
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: test2-devfile-sample-llwu-sample
+    app.kubernetes.io/part-of: test2
+  name: test2-devfile-sample-llwu-sample
+  namespace: rhn-engineering-markmc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: test2-devfile-sample-llwu-sample
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/instance: test2-devfile-sample-llwu-sample
+    spec:
+      containers:
+      - image: quay.io/redhat-appstudio/user-workload:rhn-engineering-markmc-test2-devfile-sample-llwu-sample
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3001
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        name: container-image
+        ports:
+        - containerPort: 3001
+        readinessProbe:
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          tcpSocket:
+            port: 3001
+        resources:
+          requests:
+            cpu: 10m
+            memory: 50Mi
+status: {}

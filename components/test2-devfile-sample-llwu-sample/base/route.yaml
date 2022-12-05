@@ -1,0 +1,23 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: test2-devfile-sample-llwu-sample
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: test2-devfile-sample-llwu-sample
+    app.kubernetes.io/part-of: test2
+  name: test2-devfile-sample-llwu-sample
+  namespace: rhn-engineering-markmc
+spec:
+  port:
+    targetPort: 3001
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: test2-devfile-sample-llwu-sample
+    weight: 100
+status: {}
